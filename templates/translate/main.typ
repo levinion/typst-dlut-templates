@@ -1,6 +1,5 @@
 #import "../util/style.typ":font_family,font_size
 #import "./cover.typ":cover
-#import "./introduction.typ":introduction
 #import "../util/functions.typ":empty_box
 
 #let three_line_table(values, caption: none, columns: auto)={
@@ -35,6 +34,10 @@
   figure(content, caption: caption, kind: "equation", supplement: "equation")
 }
 
+#let pic(content, caption: "")={
+  figure(content, caption: caption, kind: image)
+}
+
 #let bold(content)={
   text(font: font_family.songti_bold, weight: "bold", content)
 }
@@ -43,7 +46,7 @@
   content, chinese_title: "外文的中文题目", english_title: "The title of foreign language",
   author: "", workplace: "", faculty: "", major: "",
   name: "", id: "", sup: "", date: "",
-  abstract: none, keywords: (), intro: none,
+  abstract: none, keywords: (),
 )={
   set text(lang: "zho")
   set heading(numbering: "1.1.1    ")
@@ -73,30 +76,32 @@
     set text(font: font_family.songti, size: font_size.wu)
     v(1em)
 
-    // https://github.com/typst/typst/issues/606
-    let num = locate(
-      loc => {
-        let fig_loc = query(figure, loc).at(int(it.numbering) - 1).location()
-        let chap = counter(heading.where(level: 1)).at(fig_loc).first()
+    let num(kind) = locate(
+      loc=>{
+        let chap = counter(heading.where(level: 1)).at(loc).first()
         let chap_loc = query(heading.where(level: 1), loc).at(chap - 1).location()
-        let num_before = counter(figure).at(chap_loc).first()
-        str(chap) + "." + str(int(it.numbering) - num_before)
+        let num_before = counter(figure.where(kind: kind)).at(chap_loc).first()
+        let count = counter(figure.where(kind: kind)).at(loc).first()
+        str(chap) + "." + str(count - num_before)
       },
     )
-    if it.kind == image {
+
+    if it.kind == image and it.caption != none {
       it.body
-      "图" + num + "    " + it.caption.body
+      "图" + num(image) + "    " + it.caption.body
       v(1em)
-    } else if it.kind == table {
+    } else if it.kind == table and it.caption != none {
       text(size: font_size.wu)[
         #{
-          "表" + num + "    " + it.caption.body
+          "表" + num(table) + "    " + it.caption.body
           it.body
           v(1em)
         }
       ] + empty_box
     } else if it.kind == "equation" {
-      grid(columns: (20fr, 1fr), it.body, align(center + horizon)[(#num)])
+      grid(
+        columns: (20fr, 1fr), it.body, align(center + horizon)[(#num("equation"))],
+      )
     } else {
       it
     }
@@ -105,20 +110,24 @@
   show ref:it=>{
     let el = it.element
     if el != none {
-      let num = locate(
-        loc => {
-          let fig_loc = query(figure, loc).at(int(el.numbering) - 1).location()
-          let chap = counter(heading.where(level: 1)).at(fig_loc).first()
+      let num(kind) = locate(
+        loc=>{
+          let chap = counter(heading.where(level: 1)).at(loc).first()
           let chap_loc = query(heading.where(level: 1), loc).at(chap - 1).location()
-          let num_before = counter(figure).at(chap_loc).first()
-          str(chap) + "." + str(int(el.numbering) - num_before)
+          let num_before = counter(figure.where(kind: kind)).at(chap_loc).first()
+          let count = counter(figure.where(kind: kind)).at(loc).first()
+          str(chap) + "." + str(count - num_before)
         },
       )
       if el.kind == image {
-        "图" + num
+        "图" + num(image)
+      } else if el.kind == table {
+        "表" + num(table)
+      } else if el.kind == "equation" {
+        "公式" + num("equation")
       }
     } else {
-      "hello"
+      it
     }
   }
 
@@ -139,16 +148,18 @@
   align(
     center,
   )[
-    #par(leading:1em)[
-    #text(
-      font: font_family.songti_bold, size: font_size.san, weight: "medium",
-    )[#chinese_title]\
-    #text(
-      font: font_family.songti_bold, size: font_size.xiao_san, weight: "medium",
-    )[#author]\
-    #text(
-      font: font_family.songti_bold, size: font_size.si, weight: "regular",
-    )[#workplace]
+    #par(
+      leading: 1em,
+    )[
+      #text(
+        font: font_family.songti_bold, size: font_size.san, weight: "medium",
+      )[#chinese_title]\
+      #text(
+        font: font_family.songti_bold, size: font_size.xiao_san, weight: "medium",
+      )[#author]\
+      #text(
+        font: font_family.songti_bold, size: font_size.si, weight: "regular",
+      )[#workplace]
     ]
   ]
 
@@ -170,7 +181,7 @@
     #keywords.join("；")
   ]
   v(1em)
-  
+
   introduction(intro)
 
   content
