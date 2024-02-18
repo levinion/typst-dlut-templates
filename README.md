@@ -2,9 +2,9 @@
 
 ## Intro
 
-[](https://github.com/levinion/typst-dlut-templates/blob/main/images/cover.jpg)
+![](images/cover.jpg)
 
-[](https://github.com/levinion/typst-dlut-templates/blob/main/images/code.jpg)
+![](images/code.jpg)
 
 Typst 是一个全新的排版语言，它拥有相对较低的上手难度以及较为完备的排版功能，是 Latex 的一个非常有力的竞争对手。
 
