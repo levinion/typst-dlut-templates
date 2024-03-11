@@ -42,7 +42,7 @@
 #let cover(chinese_title, english_title, faculty, major, name, id, sup, date) = [
   #header\
   #title(chinese_title, english_title)\
-  #v(280pt)
+  #v(180pt)
   #desc(faculty, major, name, id, sup, date)
   #v(20pt)
   #fonter

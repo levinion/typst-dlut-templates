@@ -1,4 +1,4 @@
-#import "../../templates/translate/main.typ":translate
+#import "../../templates/translate/main.typ":*
 
 #show: translate.with(
   chinese_title: "",
@@ -11,7 +11,6 @@
   id: "",
   sup: "",
   date: "",
-  intro: none,
   abstract: [],
   keywords: (), 
 )

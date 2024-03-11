@@ -122,10 +122,11 @@
     if el != none {
       let num(kind) = locate(
         loc=>{
-          let chap = counter(heading.where(level: 1)).at(loc).first()
-          let chap_loc = query(heading.where(level: 1), loc).at(chap - 1).location()
+          let el_loc = el.location()
+          let chap = counter(heading.where(level: 1)).at(el_loc).first()
+          let chap_loc = query(heading.where(level: 1), el_loc).at(chap - 1).location()
           let num_before = counter(figure.where(kind: kind)).at(chap_loc).first()
-          let count = counter(figure.where(kind: kind)).at(loc).first()
+          let count = counter(figure.where(kind: kind)).at(el_loc).first()
           str(chap) + "." + str(count - num_before)
         },
       )
@@ -178,7 +179,7 @@
   introduction(intro)
 
   set text(font: font_family.songti, size: font_size.xiao_si)
-  set par(justify: false, leading: 1em, first-line-indent: 2em)
+  set par(leading: 1em, first-line-indent: 2em)
   show par:set block(spacing: 1em)
   set enum(numbering: "（1）", indent: 2em)
   show enum:it=>{

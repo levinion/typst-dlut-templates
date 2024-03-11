@@ -1,4 +1,4 @@
-#import "../../templates/thesis/main.typ": thesis,three_line_table,equa
+#import "../../templates/thesis/main.typ": *
 
 #show: thesis.with(
   chinese_title: "",
