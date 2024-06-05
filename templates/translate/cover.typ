@@ -40,12 +40,15 @@
 ]
 
 #let cover(chinese_title, english_title, faculty, major, name, id, sup, date) = [
+
+  #set page(margin: (left: 2.5cm, right: 2.5cm))
+
   #header\
   #title(chinese_title, english_title)\
   #v(180pt)
   #desc(faculty, major, name, id, sup, date)
   #v(20pt)
   #fonter
-  #pagebreak()
+  #pagebreak(weak:true)
 ]
 

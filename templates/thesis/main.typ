@@ -57,7 +57,7 @@
   chinese_keywords: (), english_abstract: none, english_keywords: (), intro: none,
   bib: none, conclusion: none, changelog: none, thanks: none,
 )={
-  set text(lang: "zho")
+  set text(lang: "zh")
   set heading(numbering: "1.1.1    ")
   set block(spacing: 0em)
 
@@ -68,7 +68,7 @@
     if it.level == 1 {
       set text(font: font_family.heiti, size: font_size.xiao_san)
       set block(below: 25pt)
-      it + empty_box
+      it + empty_box 
     } else if it.level == 2 {
       set text(font: font_family.heiti, size: font_size.si)
       set block(above: 1.5em, below: 18pt)
@@ -89,7 +89,7 @@
     let num(kind) = locate(
       loc=>{
         let chap = counter(heading.where(level: 1)).at(loc).first()
-        let chap_loc = query(heading.where(level: 1), loc).at(chap - 1).location()
+        let chap_loc = query(heading.where(level: 1), loc).at(chap + 1).location()
         let num_before = counter(figure.where(kind: kind)).at(chap_loc).first()
         let count = counter(figure.where(kind: kind)).at(loc).first()
         str(chap) + "." + str(count - num_before)
@@ -124,7 +124,7 @@
         loc=>{
           let el_loc = el.location()
           let chap = counter(heading.where(level: 1)).at(el_loc).first()
-          let chap_loc = query(heading.where(level: 1), el_loc).at(chap - 1).location()
+          let chap_loc = query(heading.where(level: 1), el_loc).at(chap + 1).location()
           let num_before = counter(figure.where(kind: kind)).at(chap_loc).first()
           let count = counter(figure.where(kind: kind)).at(el_loc).first()
           str(chap) + "." + str(count - num_before)
@@ -179,13 +179,14 @@
   introduction(intro)
 
   set text(font: font_family.songti, size: font_size.xiao_si)
-  set par(leading: 1em, first-line-indent: 2em)
+  set par(leading: 1em, first-line-indent: 2em,justify: true)
   show par:set block(spacing: 1em)
   set enum(numbering: "（1）", indent: 2em)
   show enum:it=>{
     set block(spacing: 1.25em)
     it
   }
+
   content
 
   pagebreak(weak: true)

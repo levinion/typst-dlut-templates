@@ -13,7 +13,7 @@
 
     set align(left)
     set text(font: font_family.songti, size: font_size.xiao_si)
-    set par(leading: 0.95em, first-line-indent: 2em, justify: false)
+    set par(leading: 0.95em, first-line-indent: 2em, justify: true)
     set block(spacing: 0.95em)
     content + v(1.25em) + h(-2em)
     set text(font: font_family.heiti, size: font_size.xiao_si, weight: "bold")
@@ -39,10 +39,8 @@
     set text(font: font_family.songti, size: font_size.xiao_si)
     set par(leading: 0.95em, first-line-indent: 2em, justify: true)
     [#content\
-      \
     ]
     set text(font: font_family.heiti, size: font_size.xiao_si, weight: "bold")
-    set par(leading: -0.3em)
     linebreak()
     [Key Words：#keywords.join("；")]
   }

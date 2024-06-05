@@ -45,10 +45,10 @@
 ]
 
 #let cover(chinese_title, english_title, faculty, major, name, id, sup, rev, date) = [
-  #set page(margin: (top: 3.5cm, bottom: 2.5cm, left: 0cm, right: 0cm))
+  // #set page(margin: (top: 3.5cm, bottom: 2.5cm, left: 2.5cm, right: 2.5cm))
   #header\
   #title(chinese_title, english_title)\
-  #vspacer(9)
+  #vspacer(8)
   #desc(faculty, major, name, id, sup, rev, date)\
   #vspacer(2, size: 18pt)
   #fonter

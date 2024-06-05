@@ -11,7 +11,7 @@
 
     set align(left)
     set text(font: font_family.songti, size: font_size.xiao_si)
-    set par(leading: 0.9em, first-line-indent: 2em, justify: false)
+    set par(leading: 0.9em, first-line-indent: 2em, justify: true)
     set block(spacing: 1em)
     content
     pagebreak(weak: true)

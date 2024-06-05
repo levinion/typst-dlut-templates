@@ -1,6 +1,6 @@
 #import "../util/style.typ":font_family,font_size
 #import "../util/functions.typ":invisible_heading
-
+#import "../util/bib.typ":bilingual-bibliography
 #let reference(bib)={
   if bib != none {
     set align(center)
@@ -15,9 +15,10 @@
     set par(leading: 1em)
     set block(spacing: 1em)
 
-    set bibliography(title: none, style: "gb-7714-2015-numeric", full: true)
+    let bilingual-bibliography = bilingual-bibliography(bibliography: bib)
+    bilingual-bibliography
+
     set text()
-    bib
     pagebreak(weak: true)
   }
 }

@@ -22,6 +22,6 @@
 #let vspacer(n, size: 12pt)=[
   #set text(font: font_family.songti, size: size)
   #for i in range(0, n + 1){
-    linebreak(justify: true)
+    linebreak(justify: false)
   }
 ]

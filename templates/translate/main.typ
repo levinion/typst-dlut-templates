@@ -48,7 +48,7 @@
   name: "", id: "", sup: "", date: "",
   abstract: none, keywords: (),
 )={
-  set text(lang: "zho")
+  // set text(lang: "zho")
   set heading(numbering: "1.1.1    ")
 
   show heading:it=>{
@@ -146,6 +146,8 @@
     },
   )
 
+  counter(page).update(1)
+
   align(
     center,
   )[
@@ -165,7 +167,7 @@
   ]
 
   set text(font: font_family.songti, size: font_size.xiao_si)
-  set par(leading: 1em, first-line-indent: 2em)
+  set par(justify: false, leading: 1em, first-line-indent: 2em)
   show par:set block(spacing: 1em)
   set enum(numbering: "（1）", indent: 2em)
   show enum:it=>{
